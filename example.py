@@ -5,7 +5,7 @@ import time
 reviews=[]
 
 start = time.time()
-with open("test.csv") as prof_rows:
+with open("users_rows.csv") as prof_rows:
     reader = csv.DictReader(prof_rows)
     for row in reader:
         professor = get_professor_by_school_and_name(
@@ -28,15 +28,15 @@ with open("test.csv") as prof_rows:
                             course_number = match.group(2)
                         else:
                             continue
-                    reviews.append([1,row["id"],course_number,department,rating.comment,rating.rating,rating.difficulty,rating.grade,rating.rating_tags,rating.take_again,False])
+                    reviews.append([1,row["id"],rating.date,course_number,department,rating.comment,rating.rating,rating.difficulty,rating.grade,rating.rating_tags,rating.take_again,False])
                     #print(f"Date: {rating.date}, Rating: {rating.rating}, Content: {rating.comment}, Diffifculty:{rating.difficulty}, Grade: {rating.grade}, Take Again: {rating.take_again},  ")
 
 def save_to_csv(filename, data):
     with open(filename, 'w', encoding="utf-8", newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["user_id","professor_id","course_number","department","content","quality","difficulty","grade","tags","take_again","is_user_anonymous"])
+        writer.writerow(["user_id","professor_id","created_at","course_number","department","content","quality","difficulty","grade","tags","take_again","is_user_anonymous"])
         writer.writerows(data)
 
-save_to_csv('test file.csv',reviews)
+save_to_csv('reviews.csv',reviews)
 end = time.time()
 print("took " + str(end - start) + " seconds")
