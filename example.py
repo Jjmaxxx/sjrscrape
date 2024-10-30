@@ -5,7 +5,7 @@ import time
 reviews=[]
 
 start = time.time()
-with open("test.csv") as prof_rows:
+with open("users_rows.csv") as prof_rows:
     reader = csv.DictReader(prof_rows)
     for row in reader:
         professor = get_professor_by_school_and_name(
